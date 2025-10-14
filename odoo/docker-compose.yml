@@ -5,6 +5,15 @@ volumes:
   postgres-data:
 
 services:
+  odoo-init:
+    image: odoo:19
+    command: odoo -d ${DB_NAME} -r ${USER} -w ${PASSWORD} --db_host $HOST --stop-after-init -i web
+    environment:
+      - USER=postgres
+      - PASSWORD=postgres
+      - HOST=db
+    depends:
+      - db
   odoo:
     image: odoo:19
     depends_on:
