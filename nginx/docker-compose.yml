@@ -1,0 +1,13 @@
+volumes:
+  nginx_conf:
+  nginx_cert:
+services:
+  nginx:
+    image: nginx:1.25.3-alpine
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx_conf:/etc/nginx/conf.d:ro
+      - nginx_cert:/etc/nginx/cert

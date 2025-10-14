@@ -1,0 +1,12 @@
+volumes:
+  notebooks:
+services:
+  jupyter:
+    image: jupyter/datascience-notebook:python-3.11
+    user: root
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - notebooks:/home/jovyan/work:z
+    ports:
+      - 8888:8888

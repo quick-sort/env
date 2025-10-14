@@ -1,0 +1,69 @@
+volumes:
+  redis_data:
+  postgres_data:
+  superset_home:
+services:
+  redis:
+    image: redis:7.0-alpine
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data
+
+  superset:
+    image: apache/superset:3.1.1-py310
+    user: "root"
+    env_file: superset.env
+    volumes:
+      - superset_home:/app/superset_home
+      - ./superset_config.py:/app/docker/pythonpath_dev/superset_config.py
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - 8088:8088
+
+  superset-worker:
+    image: apache/superset:3.1.1-py310
+    user: "root"
+    command: celery --app=superset.tasks.celery_app:app worker -O fair -l INFO
+    env_file: superset.env
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - superset_home:/app/superset_home
+      - ./superset_config.py:/app/docker/pythonpath_dev/superset_config.py
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "celery -A superset.tasks.celery_app:app inspect ping -d celery@$$HOSTNAME",
+        ]
+  superset-init:
+    image: apache/superset:3.1.1-py310
+    user: "root"
+    env_file: superset.env
+    depends_on:
+      - redis
+      - postgres
+    command: >
+      bash -c "superset db upgrade && superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin && superset init"
+    volumes:
+      - superset_home:/app/superset_home
+      - ./superset_config.py:/app/docker/pythonpath_dev/superset_config.py
+    healthcheck:
+      disable: true

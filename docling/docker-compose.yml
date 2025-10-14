@@ -4,7 +4,7 @@ services:
   docling:
     image: ghcr.io/docling-project/docling-serve-cpu:v1.6.0
     container_name: docling
-    restart: always
+    restart: unless-stopped
     environment:
       DOCLING_SERVE_ENABLE_UI: true
     ports:
