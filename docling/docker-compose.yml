@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  docling:
+    image: ghcr.io/docling-project/docling-serve-cpu:v1.6.0
+    container_name: docling
+    restart: always
+    environment:
+      DOCLING_SERVE_ENABLE_UI: true
+    ports:
+      - "8003:5001"
