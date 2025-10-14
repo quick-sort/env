@@ -1,0 +1,13 @@
+volumes:
+  config:
+  data:
+services:
+  ocis:
+    image: owncloud/ocis
+    environment:
+      IDM_CREATE_DEMO_USERS: true
+    volumes:
+      - config:/etc/ocis
+      - data:/var/lib/ocis
+    ports:
+      - 9200:9200
