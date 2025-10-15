@@ -11,4 +11,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  open-webui: {}
+  open-webui:

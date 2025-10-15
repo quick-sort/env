@@ -6,7 +6,7 @@ services:
     container_name: redis
     command: redis-server --requirepass redis_password
     volumes:
-      - redis-data:/data
+      - data:/data
     ports:
       - "6379:6379"
     healthcheck:
@@ -17,4 +17,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  redis-data:
+  data:

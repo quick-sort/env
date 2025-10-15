@@ -18,8 +18,6 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
-    networks:
-      - postgres-network
 
   pgadmin:
     image: dpage/pgadmin4:9
@@ -36,13 +34,7 @@ services:
       postgres:
         condition: service_healthy
     restart: unless-stopped
-    networks:
-      - postgres-network
 
 volumes:
   postgres-data:
   pgadmin-data:
-
-networks:
-  postgres-network:
-    driver: bridge

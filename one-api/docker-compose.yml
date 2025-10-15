@@ -10,7 +10,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
     volumes:
-      - one-api-data:/data
+      - data:/data
 
 volumes:
-  one-api-data:
+  data:
