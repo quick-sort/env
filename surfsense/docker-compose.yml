@@ -33,6 +33,7 @@ services:
       - ETL_SERVICE=DOCLING
       - FIRECRAWL_API_KEY=fc-a8dfd43eede94b778d1fe539f784353a
       - HF_ENDPOINT=https://hf-mirror.com
+      - SECRET_KEY=SECRET
   db:
     image: pgvector/pgvector:pg18
     environment:
