@@ -1,6 +1,6 @@
 volumes:
-  nginx_conf:
-  nginx_cert:
+  conf:
+  cert:
 services:
   nginx:
     image: nginx:1.25.3-alpine
@@ -9,5 +9,5 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - nginx_conf:/etc/nginx/conf.d:ro
-      - nginx_cert:/etc/nginx/cert
+      - conf:/etc/nginx/conf.d:ro
+      - cert:/etc/nginx/cert:ro
