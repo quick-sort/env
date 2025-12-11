@@ -1,31 +1,37 @@
 volumes:
-  odoo_config:
-  odoo_data:
-  odoo_extra_addons:
-  postgres-data:
+  config:
+  data:
+  extra_addons:
+  db_data:
 
 services:
-  odoo-init:
+  init:
     image: odoo:19
-    command: odoo -d ${DB_NAME} -r ${USER} -w ${PASSWORD} --db_host $HOST --stop-after-init -i web
-    environment:
-      - USER=postgres
-      - PASSWORD=postgres
-      - HOST=db
+    container_name: odoo-init
+    command: odoo -d odoo -r odoo -w odoo --db_host db --stop-after-init -i web
+    volumes:
+      - config:/etc/odoo
+      - data:/var/lib/odoo
+      - extra_addons:/mnt/extra-addons
     depends:
       - db
   odoo:
     image: odoo:19
+    container_name: odoo
+    restart: unless-stopped
     depends_on:
-      - db
+      init:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
     environment:
-      - USER=postgres
-      - PASSWORD=postgres
+      - USER=odoo
+      - PASSWORD=odoo
       - HOST=db
     volumes:
-      - odoo_config:/etc/odoo
-      - odoo_local:/var/lib/odoo
-      - odoo_addons:/mnt/extra-addons
+      - config:/etc/odoo
+      - data:/var/lib/odoo
+      - extra_addons:/mnt/extra-addons
     ports:
       - "8069:8069"
       - "8071:8071"
@@ -37,7 +43,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
