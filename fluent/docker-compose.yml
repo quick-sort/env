@@ -1,0 +1,10 @@
+services:
+  fluentbit:
+    image: fluent/fluent-bit:4.2.1
+    restart: unless-stopped
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+    ports:
+      # 暴露给宿主机，以便 app 容器可以访问
+      - "24224:24224"
+      - "24224:24224/udp"
