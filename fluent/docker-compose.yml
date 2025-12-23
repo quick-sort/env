@@ -4,6 +4,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker_metrics.lua:/fluent-bit/lua/docker_metrics.lua
     ports:
       # 暴露给宿主机，以便 app 容器可以访问
       - "24224:24224"
