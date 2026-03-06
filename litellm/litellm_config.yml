@@ -1,0 +1,59 @@
+model_list:
+  - model_name: claude-opus-4-6
+    litellm_params:
+      model: anthropic/MiniMax-M2.5
+      api_base: https://api.minimaxi.com/anthropic
+      api_key: os.environ/MINIMAX_API_KEY
+
+  - model_name: claude-sonnet-4-6
+    litellm_params:
+      model: anthropic/MiniMax-M2.5
+      api_base: https://api.minimaxi.com/anthropic
+      api_key: os.environ/MINIMAX_API_KEY
+
+  - model_name: claude-opus-4-5
+    litellm_params:
+      model: anthropic/glm-4.7
+      api_base: https://open.bigmodel.cn/api/anthropic
+      api_key: os.environ/GLM_API_KEY
+
+  - model_name: claude-sonnet-4-5
+    litellm_params:
+      model: anthropic/glm-4.7
+      api_base: https://open.bigmodel.cn/api/anthropic
+      api_key: os.environ/GLM_API_KEY
+
+  - model_name: claude-haiku-4-5
+    litellm_params:
+      model: anthropic/glm-4.5-air
+      api_base: https://open.bigmodel.cn/api/anthropic
+      api_key: os.environ/GLM_API_KEY
+
+  - model_name: 
+    litellm_params:
+      model: openai/embedding-3
+      api_base: https://open.bigmodel.cn/api/paas/v4/
+      api_key: os.environ/GLM_API_KEY
+    model_info:
+      mode: embedding
+
+search_tools:
+  - search_tool_name: tavily-search
+    litellm_params:
+      search_provider: tavily
+      api_key: os.environ/TAVILY_API_KEY
+
+mcp_servers:
+  tavily:
+    url: https://mcp.tavily.com/mcp/
+    transport: http
+    auth_type: bearer_token
+    authentication_token: os.environ/TAVILY_API_KEY
+
+litellm_settings:
+  drop_params: True
+
+general_settings:
+  database_url: postgresql://postgres:postgres@postgres:5432/litellm
+  master_key: sk-laGwcFtn4L2LAvC7Yav5Y17xZ7jTQ6J9vI034ICrqxo
+  store_prompts_in_spend_logs: true

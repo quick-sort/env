@@ -5,15 +5,17 @@ services:
     ## Uncomment these lines to start proxy with a config.yaml file ##
     # volumes:
     # - ./config.yaml:/app/config.yaml
-    # command:
-    # - "--config=/app/config.yaml"
+    command:
+      - "--config=/app/config.yaml"
     ##############################################
     ports:
       - "4000:4000" # Map the container port to the host, change the host port if necessary
     environment:
-      DATABASE_URL: "postgresql://llmproxy:dbpassword9090@db:5432/litellm"
-      STORE_MODEL_IN_DB: "True" # allows adding models to proxy via UI
-      STORE_PROMPTS_IN_SPEND_LOGS: "True"
+      - TAVILY_API_KEY= 
+      - GLM_API_KEY=
+      - MINIMAX_API_KEY=
+      - LITELLM_MASTER_KEY=sk-laGwcFtn4L2LAvC7Yav5Y17xZ7jTQ6J9vI034ICrqxo
+      - GEMINI_API_BASE=https://aiplatform.googleapis.com/v1/projects/379930213274/locations/global/publishers/google
     env_file:
       - .env # Load local .env file
     depends_on:
