@@ -49,6 +49,17 @@ mcp_servers:
     transport: http
     auth_type: bearer_token
     authentication_token: os.environ/TAVILY_API_KEY
+  n8n:
+    url: http://n8n-mcp:5679/mcp
+    transport: http
+    auth_type: bearer_token
+    authentication_token: os.environ/N8N_API_KEY
+  context7:
+    url: https://mcp.context7.com/mcp
+    transport: http
+    auth_type: bearer_token
+    authentication_token: os.environ/CONTEXT7_API_KEY
+
 
 litellm_settings:
   drop_params: True

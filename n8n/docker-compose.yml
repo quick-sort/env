@@ -44,16 +44,16 @@ services:
       PORT: 3000
       
       # Database
-      NODE_DB_PATH: ${NODE_DB_PATH:-/app/data/nodes.db}
+      NODE_DB_PATH: /app/data/nodes.db
       REBUILD_ON_START: ${REBUILD_ON_START:-false}
 
       # Telemetry: Anonymous usage statistics are ENABLED by default
       # To opt-out, uncomment and set to 'true':
-      # N8N_MCP_TELEMETRY_DISABLED: ${N8N_MCP_TELEMETRY_DISABLED:-true}
+      N8N_MCP_TELEMETRY_DISABLED: false
 
       # Optional: n8n API configuration (enables 16 additional management tools)
       # Uncomment and configure to enable n8n workflow management
-      N8N_API_URL: http://n8n
+      N8N_API_URL: http://n8n:5678
       N8N_API_KEY: ''
       # N8N_API_TIMEOUT: ${N8N_API_TIMEOUT:-30000}
       # N8N_API_MAX_RETRIES: ${N8N_API_MAX_RETRIES:-3}
@@ -64,7 +64,7 @@ services:
     
     # Port mapping
     ports:
-      - "3000:3000"
+      - "5679:3000"
     
     # Resource limits
     deploy:
