@@ -53,24 +53,31 @@ mcp_servers:
   deepwiki:
     url: https://mcp.deepwiki.com/mcp
     transport: http
+    allow_all_keys: true
+    available_on_public_internet: true
 
   tavily:
     url: https://mcp.tavily.com/mcp/
     transport: http
     auth_type: bearer_token
     authentication_token: os.environ/TAVILY_API_KEY
+    allow_all_keys: true
+    available_on_public_internet: true
 
   n8n:
-    url: http://n8n-mcp:5679/mcp
+    url: http://n8n-mcp:3000/mcp
     transport: http
     auth_type: bearer_token
     authentication_token: os.environ/N8N_API_KEY
+    allow_all_keys: true
 
   context7:
     url: https://mcp.context7.com/mcp
     transport: http
     auth_type: bearer_token
     authentication_token: os.environ/CONTEXT7_API_KEY
+    allow_all_keys: true
+    available_on_public_internet: true
 
 
 litellm_settings:
@@ -83,6 +90,7 @@ litellm_settings:
     namespace: "litellm.caching.caching"
 router_settings:
   routing_strategy: least-busy
+  model_group_alias: {"claude-haiku-4-5-20251001": "claude-haiku-4-5"}
   redis_host: redis
   redis_port: 6379
 
