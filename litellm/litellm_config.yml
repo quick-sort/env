@@ -4,36 +4,42 @@ model_list:
       model: anthropic/MiniMax-M2.5
       api_base: https://api.minimaxi.com/anthropic
       api_key: os.environ/MINIMAX_API_KEY
+      weight: 1
 
   - model_name: claude-sonnet-4-6
     litellm_params:
       model: anthropic/MiniMax-M2.5
       api_base: https://api.minimaxi.com/anthropic
       api_key: os.environ/MINIMAX_API_KEY
+      weight: 1
 
   - model_name: claude-haiku-4-5
     litellm_params:
       model: anthropic/MiniMax-M2.5
       api_base: https://api.minimaxi.com/anthropic
       api_key: os.environ/MINIMAX_API_KEY
+      weight: 1
 
   - model_name: claude-opus-4-6
     litellm_params:
       model: anthropic/glm-4.7
       api_base: https://open.bigmodel.cn/api/anthropic
       api_key: os.environ/GLM_API_KEY
+      weight: 1
 
   - model_name: claude-sonnet-4-6
     litellm_params:
       model: anthropic/glm-4.7
       api_base: https://open.bigmodel.cn/api/anthropic
       api_key: os.environ/GLM_API_KEY
+      weight: 1
 
   - model_name: claude-haiku-4-5
     litellm_params:
       model: anthropic/glm-4.7
       api_base: https://open.bigmodel.cn/api/anthropic
       api_key: os.environ/GLM_API_KEY
+      weight: 1
 
   - model_name: embedding-3
     litellm_params:
@@ -82,14 +88,14 @@ mcp_servers:
 
 litellm_settings:
   drop_params: True
-  cache: True
+  cache: False
   cache_params:
     type: redis
     host: redis
     port: 6379
     namespace: "litellm.caching.caching"
 router_settings:
-  routing_strategy: least-busy
+  routing_strategy: simple-shuffle 
   model_group_alias: {"claude-haiku-4-5-20251001": "claude-haiku-4-5"}
   redis_host: redis
   redis_port: 6379
