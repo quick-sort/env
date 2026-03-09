@@ -98,3 +98,4 @@ general_settings:
   database_url: postgresql://postgres:postgres@postgres:5432/litellm
   master_key: sk-laGwcFtn4L2LAvC7Yav5Y17xZ7jTQ6J9vI034ICrqxo
   store_prompts_in_spend_logs: true
+  proxy_batch_write_at: 300
