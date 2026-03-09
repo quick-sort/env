@@ -11,13 +11,19 @@ model_list:
       api_base: https://api.minimaxi.com/anthropic
       api_key: os.environ/MINIMAX_API_KEY
 
-  - model_name: claude-opus-4-5
+  - model_name: claude-haiku-4-5
+    litellm_params:
+      model: anthropic/MiniMax-M2.5
+      api_base: https://api.minimaxi.com/anthropic
+      api_key: os.environ/MINIMAX_API_KEY
+
+  - model_name: claude-opus-4-6
     litellm_params:
       model: anthropic/glm-4.7
       api_base: https://open.bigmodel.cn/api/anthropic
       api_key: os.environ/GLM_API_KEY
 
-  - model_name: claude-sonnet-4-5
+  - model_name: claude-sonnet-4-6
     litellm_params:
       model: anthropic/glm-4.7
       api_base: https://open.bigmodel.cn/api/anthropic
@@ -25,11 +31,11 @@ model_list:
 
   - model_name: claude-haiku-4-5
     litellm_params:
-      model: anthropic/glm-4.5-air
+      model: anthropic/glm-4.7
       api_base: https://open.bigmodel.cn/api/anthropic
       api_key: os.environ/GLM_API_KEY
 
-  - model_name: 
+  - model_name: embedding-3
     litellm_params:
       model: openai/embedding-3
       api_base: https://open.bigmodel.cn/api/paas/v4/
@@ -44,16 +50,22 @@ search_tools:
       api_key: os.environ/TAVILY_API_KEY
 
 mcp_servers:
+  deepwiki:
+    url: https://mcp.deepwiki.com/mcp
+    transport: http
+
   tavily:
     url: https://mcp.tavily.com/mcp/
     transport: http
     auth_type: bearer_token
     authentication_token: os.environ/TAVILY_API_KEY
+
   n8n:
     url: http://n8n-mcp:5679/mcp
     transport: http
     auth_type: bearer_token
     authentication_token: os.environ/N8N_API_KEY
+
   context7:
     url: https://mcp.context7.com/mcp
     transport: http
@@ -63,6 +75,16 @@ mcp_servers:
 
 litellm_settings:
   drop_params: True
+  cache: True
+  cache_params:
+    type: redis
+    host: redis
+    port: 6379
+    namespace: "litellm.caching.caching"
+router_settings:
+  routing_strategy: least-busy
+  redis_host: redis
+  redis_port: 6379
 
 general_settings:
   database_url: postgresql://postgres:postgres@postgres:5432/litellm
