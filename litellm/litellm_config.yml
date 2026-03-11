@@ -48,6 +48,12 @@ model_list:
       api_key: os.environ/GLM_API_KEY
     model_info:
       mode: embedding
+default_model:
+  model_name: claude-sonnet-4-6
+  litellm_params:
+    model: anthropic/MiniMax-M2.5
+    api_base: https://api.minimaxi.com/anthropic
+    api_key: os.environ/MINIMAX_API_KEY
 
 search_tools:
   - search_tool_name: tavily-search
@@ -104,4 +110,3 @@ general_settings:
   database_url: postgresql://postgres:postgres@postgres:5432/litellm
   master_key: sk-laGwcFtn4L2LAvC7Yav5Y17xZ7jTQ6J9vI034ICrqxo
   store_prompts_in_spend_logs: true
-  proxy_batch_write_at: 300
