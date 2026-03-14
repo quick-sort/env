@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  v2ray:
+    image: ghcr.io/v2fly/v2ray:v5.47
+    container_name: v2ray
+    restart: unless-stopped
+    ports:
+      # VLess + Reality (main port)
+      - "443:443"
+    volumes:
+      # Mount configuration file
+      - ./config.json:/etc/v2ray/config.json:ro
+    networks:
+      - v2ray-net
+
+networks:
+  v2ray-net:
+    driver: bridge
