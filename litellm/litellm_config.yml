@@ -35,6 +35,30 @@ search_tools:
       api_key: os.environ/TAVILY_API_KEY
 
 mcp_servers:
+  web_search:
+    url: https://open.bigmodel.cn/api/mcp/web_search_prime/mcp
+    transport: http
+    allow_all_keys: true
+    available_on_public_internet: true
+    auth_type: bearer_token
+    authentication_token: os.environ/GLM_API_KEY
+
+  web_fetch:
+    url: https://open.bigmodel.cn/api/mcp/web_reader/mcp
+    transport: http
+    allow_all_keys: true
+    available_on_public_internet: true
+    auth_type: bearer_token
+    authentication_token: os.environ/GLM_API_KEY
+
+  github_search:
+    url: https://open.bigmodel.cn/api/mcp/zread/mcp
+    transport: http
+    allow_all_keys: true
+    available_on_public_internet: true
+    auth_type: bearer_token
+    authentication_token: os.environ/GLM_API_KEY
+
   deepwiki:
     url: https://mcp.deepwiki.com/mcp
     transport: http
@@ -76,7 +100,7 @@ litellm_settings:
     namespace: "litellm.caching.caching"
 router_settings:
   routing_strategy: simple-shuffle 
-  model_group_alias: {"claude-haiku-4-5-20251001": "claude-haiku-4-5"}
+  model_group_alias: {"claude-haiku-4-5-20251001": "claude-haiku"}
   redis_host: redis
   redis_port: 6379
 
