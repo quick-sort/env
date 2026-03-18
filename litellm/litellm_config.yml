@@ -1,16 +1,16 @@
 model_list:
   - model_name: claude-opus
     litellm_params:
-      model: anthropic/MiniMax-M2.5
+      model: anthropic/MiniMax-M2.7
       api_base: https://api.minimaxi.com/anthropic
       api_key: os.environ/MINIMAX_API_KEY
       weight: 1
 
   - model_name: claude-sonnet
     litellm_params:
-      model: anthropic/glm-4.7
-      api_base: https://open.bigmodel.cn/api/anthropic
-      api_key: os.environ/GLM_API_KEY
+      model: anthropic/MiniMax-M2.5
+      api_base: https://api.minimaxi.com/anthropic
+      api_key: os.environ/MINIMAX_API_KEY
       weight: 1
 
   - model_name: claude-haiku
