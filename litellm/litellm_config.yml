@@ -35,6 +35,13 @@ search_tools:
       api_key: os.environ/TAVILY_API_KEY
 
 mcp_servers:
+  minimax:
+    transport: stdio
+    command: uvx
+    args: ["minimax-coding-plan-mcp", "-y"]
+    env:
+      MINIMAX_API_KEY: os.environ/MINIMAX_API_KEY
+      MINIMAX_API_HOST: https://api.minimaxi.com
   web_search:
     url: https://open.bigmodel.cn/api/mcp/web_search_prime/mcp
     transport: http
