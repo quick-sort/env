@@ -1,0 +1,19 @@
+service:
+  max_workers: 16          # 充分利用 16 核处理并发请求
+
+performance:
+  max_search_threads: 12   # 搜索线程，留 2-4 核给优化/系统
+  optimizer_cpu_budget: 2  # 限制后台优化占用 CPU
+
+optimizers:
+  default_segment_number: 2   # 关键！读多写少 → 少量大 segment，提升并发吞吐
+  max_segment_size: 5000000   # 每个 collection 1M 向量，足够大
+  max_optimization_threads: 2 # 写少，限制优化线程
+  indexing_threshold: 10000
+
+hnsw_index:
+  max_indexing_threads: 8
+  on_disk: true               # 索引放磁盘，省内存
+
+storage:
+  on_disk_payload: true       # payload 也走磁盘（SSD 快）
